@@ -5,7 +5,7 @@ import axios from 'axios';
 import StreamCard from "./components/StreamCard.jsx";
 import NoStreamsImage from "../img/no_streams.svg"
 const App = () => {
-    const API_URL = "localhost";
+    const API_URL = "http://localhost";
     const [streams, setStreams] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -17,7 +17,7 @@ const App = () => {
     const getStreams = async () => {
         try {
             const response = await axios.get(`${API_URL}/api/streams`, {
-                headers: isLoggedIn ? { Authorization: `Bearer ${localStorage.getItem('token')}` } : {}
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             setStreams(response.data);
         } catch (error) {
@@ -49,8 +49,9 @@ const App = () => {
         if (token) {
             setIsLoggedIn(true);
             if (savedUsername) setUsername(savedUsername);
-            getStreams();
+            
         }
+        getStreams();
     }, []);
 
     const handleLogin = async (values) => {

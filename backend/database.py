@@ -36,12 +36,13 @@ class UserOrm(Model):
     is_verified: Mapped[bool] = mapped_column(default=False)
     streams = relationship("StreamOrm", back_populates="owner", cascade="all, delete")
 
-# Создание таблиц в базе данных
+# Создание таблиц в базе данных, если они еще не существуют
 async def create_tables():
     async with engine.begin() as conn:
-        await conn.run_sync(Model.metadata.create_all)
+        await conn.run_sync(Model.metadata.create_all, checkfirst=True)
 
 # Удаление всех таблиц из базы данных
 async def delete_tables():
     async with engine.begin() as conn:
         await conn.run_sync(Model.metadata.drop_all)
+

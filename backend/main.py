@@ -9,8 +9,8 @@ from templates import templates
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await delete_tables()
-    print("База очищена")
+    #await delete_tables()
+    #print("База очищена")
     await create_tables()
     print("База готова к работе")
     yield
@@ -21,13 +21,10 @@ app = FastAPI(lifespan=lifespan)
 
 # Настройка CORS
 origins = [
-    "localhost:5173",
+    "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "localhost:3000",
-    "http://127.0.0.1:3000",
-    "localhost",
-    "localhost:3000",
-    "localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
 
 app.add_middleware(
