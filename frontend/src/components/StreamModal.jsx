@@ -88,24 +88,24 @@ function StreamModal({ stream, isVisible, onClose, onStreamUpdated, onStreamDele
                 width="100%"
                 height="400px"
                 src={videoLink}
-                title={stream.name || "Название стрима"}
+                title={stream.name || "Название видео не было выбрано"}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
             ></iframe>
             <div style={{ marginTop: '20px' }}>
-                <h3>{stream.name || "Название стрима"}</h3>
-                <p>{stream.description || "описание стрима"}</p>
+                <h3>{stream.name || "Название видео не было выбрано"}</h3>
+                <p>{stream.description || "Описание видео не было выбрано"}</p>
                 <Button onClick={() => setIsEditing(true)}>Редактировать</Button>
                 <Button danger onClick={handleDeleteStream}>Удалить</Button>
             </div>
 
             {isEditing && (
                 <Form form={form} initialValues={stream} style={{ marginTop: '20px' }}>
-                    <Form.Item name="name" label="Название" rules={[{ required: true, message: 'Введите название стрима!' }]}>
+                    <Form.Item name="name" label="Название" rules={[{ required: true, message: 'Введите название стрима...' }]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name="description" label="Описание" rules={[{ required: true, message: 'Введите описание стрима!' }]}>
+                    <Form.Item name="description" label="Описание" rules={[{ required: true, message: 'Введите описание стрима...' }]}>
                         <Input.TextArea />
                     </Form.Item>
                     <Form.Item name="preview" label="Ссылка на превью">

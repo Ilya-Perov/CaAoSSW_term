@@ -24,8 +24,8 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
             <Card
                 hoverable
                 style={{
-                    width: 300,
-                    height: 400, // Фиксированная высота для карточки
+                    width: '80%',
+                    height: '40%', // Фиксированная высота для карточки
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between'
@@ -33,10 +33,10 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                 onClick={showModal}
             >
                 {/* Обертка для изображения с фиксированной высотой */}
-                <div style={{ height: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
-                        alt="превью"
-                        src={stream.preview || "https://i.pinimg.com/originals/e1/72/d0/e172d05d88f80b469f298697570e10a3.jpg"}
+                        alt="Плейсхолдер заставки видео"
+                        src={stream.preview || "https://99px.ru/sstorage/53/2024/11/mid_364005_906745.jpg"}
                         style={{
                             width: '100%',
                             height: '100%',
@@ -48,11 +48,11 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                 {/* Текстовая информация и имя автора */}
                 <div style={{ padding: '10px', textAlign: 'left' }}>
                     <Meta
-                        title={stream.name || "Название стрима"}
-                        description={stream.description || "Описание стрима"}
+                        title={stream.name || "Название видео не указано"}
+                        description={stream.description || "Описание видео не указано"}
                     />
                     <div style={{ marginTop: 8 }}>
-                        <Tag color="blue">{stream.owner_name || "Владелец стрима не указан"}</Tag>
+                        <Tag color="blue">{stream.owner_name || "Владелец видео не указан"}</Tag>
                     </div>
                 </div>
             </Card>

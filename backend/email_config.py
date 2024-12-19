@@ -9,7 +9,7 @@ conf = ConnectionConfig(
     MAIL_FROM=os.getenv("MAIL_USERNAME"),  # Use the same email as MAIL_USERNAME
     MAIL_PORT=587,
     MAIL_SERVER="smtp.mail.ru",  # Update to the correct SMTP server for your email provider
-    MAIL_FROM_NAME="Stream Platform",
+    MAIL_FROM_NAME="Let's watch",
     MAIL_STARTTLS=True,            # Enable STARTTLS
     MAIL_SSL_TLS=False,            # Disable SSL/TLS
 )

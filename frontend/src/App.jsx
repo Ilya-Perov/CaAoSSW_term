@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Empty, List, Button, Space, Modal, Input, Form } from 'antd';
 import axios from 'axios';
 import StreamCard from "./components/StreamCard.jsx";
-import NoStreamsImage from "../img/no_streams.svg"
 const App = () => {
     const API_URL = "http://localhost";
     const [streams, setStreams] = useState([]);
@@ -90,7 +89,7 @@ const App = () => {
             });
 
             if (response.status === 200) {
-                alert('Регистрация прошла успешно! Перейдите на ссылку в письме, чтобы активировать аккаунт');
+                alert('Регистрация успешна! Перейдите по ссылке в письме на Вашей почте, чтобы закончить регистрацию');
                 setIsRegisterModalVisible(false);
             } else {
                 alert(response.data.message);
@@ -141,11 +140,11 @@ const App = () => {
     };
 
     return (
-        <div style={{ padding: '20px', position: 'relative' }}>
-            {isLoggedIn && <div style={{ position: 'absolute', top: 10, left: 10, fontWeight: 'bold' }}>Привет, {username}!</div>}
+        <div style={{ padding: '20px', position: 'relative', backgroundColor:'darkgray' }}>
+            {isLoggedIn && <div style={{ position: 'absolute', top: 18, left: 18, fontWeight: 'bold' }}>Добрый день, {username}!</div>}
             <Space style={{ marginBottom: '20px', float: 'right' }}>
                 <Button type="primary" onClick={() => setIsModalVisible(true)}>
-                    Добавить стрим
+                    Новое видео
                 </Button>
                 {!isLoggedIn ? (
                     <>
@@ -158,12 +157,10 @@ const App = () => {
             </Space>
 
             {/* List Container */}
-            <div style={{ clear: 'both' }}>
+            <div style={{ clear: 'both', backgroundColor: 'lightgray'}}>
                 {streams.length === 0 ? (
                     <Empty
-                        image={NoStreamsImage}
-                        imageStyle={{ height: 100 }}
-                        description={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Нет стримов</span>}
+                        description={<span style={{ fontSize: '24px', fontWeight: 'bold', textAlign:'center'}}>Здесь пока пусто...<br/>Давайте что-нибудь посмотрим</span>}
                     />
                 ) : (
                     <List
@@ -196,26 +193,29 @@ const App = () => {
                         layout="vertical"
                     >
                         <Form.Item
+                            placeholder="Электронная почта"
                             label="Электронная почта"
                             name="email"
                             rules={[
-                                { required: true, message: 'Пожалуйста, введите электронную почту!' },
-                                { type: 'email', message: 'Пожалуйста, введите корректный адрес электронной почты!' }
+                                { required: true, message: 'Введите электронную почту...' },
+                                { type: 'email', message: 'Пожалуйста, введите корректный адрес электронной почты вида: example@example.com' }
                             ]}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
+                            placeholder="Имя пользователя"
                             label="Имя пользователя"
                             name="username"
-                            rules={[{ required: true, message: 'Пожалуйста, введите имя пользователя!' }]}
+                            rules={[{ required: true, message: 'Введите имя пользователя...' }]}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
+                            placeholder="Пароль"
                             label="Пароль"
                             name="password"
-                            rules={[{ required: true, message: 'Пожалуйста, введите пароль!' }]}
+                            rules={[{ required: true, message: 'Введите пароль...' }]}
                         >
                             <Input.Password />
                         </Form.Item>
@@ -241,16 +241,18 @@ const App = () => {
                         layout="vertical"
                     >
                         <Form.Item
+                            placeholder="Имя пользователя"
                             label="Имя пользователя"
                             name="username"
-                            rules={[{ required: true, message: 'Пожалуйста, введите имя пользователя!' }]}
+                            rules={[{ required: true, message: 'Введите имя пользователя...' }]}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
+                            placeholder="Пароль"
                             label="Пароль"
                             name="password"
-                            rules={[{ required: true, message: 'Пожалуйста, введите пароль!' }]}
+                            rules={[{ required: true, message: 'Введите пароль...' }]}
                         >
                             <Input.Password />
                         </Form.Item>
@@ -264,7 +266,7 @@ const App = () => {
 
                 {/* Add Stream Modal */}
                 <Modal
-                    title="Добавить стрим"
+                    title="Добавить видео"
                     open={isModalVisible}
                     onCancel={() => setIsModalVisible(false)}
                     footer={null}
@@ -276,9 +278,10 @@ const App = () => {
                         layout="vertical"
                     >
                         <Form.Item
-                            label="Название стрима"
+                            placeholder="Название видео"
+                            label="Название вашего видео"
                             name="name"
-                            rules={[{required: true, message: 'Пожалуйста, введите название стрима!'}]}
+                            rules={[{required: true, message: 'Введите название видео'}]}
                         >
                             <Input
                                 value={newStream.name}
@@ -286,7 +289,7 @@ const App = () => {
                             />
                         </Form.Item>
                         <Form.Item
-                            label="Описание"
+                            label="Описание видео"
                             name="description"
                         >
                             <Input
@@ -295,7 +298,8 @@ const App = () => {
                             />
                         </Form.Item>
                         <Form.Item
-                            label="Ссылка на превью"
+                            placeholder="Ссылка на заставку"
+                            label="Ссылка на заставку"
                             name="preview"
                         >
                             <Input
@@ -304,6 +308,7 @@ const App = () => {
                             />
                         </Form.Item>
                         <Form.Item
+                            placeholder="Ссылка на видео"
                             label="Ссылка на видео"
                             name="link"
                         >
