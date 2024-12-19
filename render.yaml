@@ -1,0 +1,87 @@
+databases:
+  - name: db # Render PG13
+    databaseName: mydatabase
+    user: username
+    password: password
+    postgresMajorVersion: 13
+
+services:
+  - type: redis # Render Redis
+    name: redis
+    ipAllowList: []
+
+  - type: web
+    name: frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    ports:
+      - port: 80
+        internalPort: 3000
+    envVars:
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+      - key: DATABASE_URL
+        value: postgresql+asyncpg://username:password@db/mydatabase
+
+  - type: web
+    name: backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    ports:
+      - port: 80
+        internalPort: 8000
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql+asyncpg://username:password@db/mydatabase
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+
+  - type: web
+    name: nginx
+    env: docker
+    image: nginx:latest
+    ports:
+      - port: 80
+        internalPort: 80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs:/var/log/nginx
+    dependsOn:
+      - frontend
+      - backend
+    envVars: []
+    
+  - type: worker
+    name: celery
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    command: celery -A celery_tasks worker --loglevel=info
+    dependsOn:
+      - redis
+    envVars:
+      - key: CELERY_BROKER_URL
+        value: redis://redis:6379/0
+
+  - type: web
+    name: flower
+    env: docker
+    image: mher/flower
+    ports:
+      - port: 5555
+        internalPort: 5555
+    envVars:
+      - key: CELERY_BROKER_URL
+        value: redis://redis:6379/0
+    dependsOn:
+      - redis
+
+volumes:
+  pgdata:
+    type: persistent
+    size: 10 # Adjust size based on your needs
