@@ -46,9 +46,6 @@ services:
     envVars:
       - key: PORT
         value: "80"
-    dependsOn:
-      - frontend
-      - backend
 
   - type: worker
     name: celery-worker
@@ -89,7 +86,3 @@ services:
         value: admin@admin.com
       - key: PGADMIN_DEFAULT_PASSWORD
         value: admin
-
-volumes:
-  - name: pgdata
-    disk: 1GB
