@@ -22,10 +22,13 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
         <div
             className="flex items-center"
             style={{
-                margin: '10px 0 0 10px', // Отступ сверху и слева в 10px
-                backgroundColor: '#f0f0f0', // Подложка - светло-серый цвет
-                padding: '20px', // Добавлен отступ вокруг карточки
-                borderRadius: '10px', // Подложка тоже немного скруглена
+                margin: '10px', // Отступы карточки от краёв
+                backgroundColor: '#f0f0f0', // Фон всей страницы (или контейнера)
+                padding: '20px', // Общий отступ внутри фона
+                borderRadius: '10px', // Скругление краёв общего контейнера
+                display: 'flex',
+                justifyContent: 'center', // Выравнивание карточки по горизонтали
+                alignItems: 'center', // Выравнивание по вертикали
             }}
         >
             <Card
