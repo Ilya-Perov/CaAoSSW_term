@@ -1,12 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Tag } from 'antd';
+import { Card } from 'antd';
 import StreamModal from './StreamModal';
 
 const { Meta } = Card;
 
-// eslint-disable-next-line react/prop-types
 function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -25,28 +24,19 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                 hoverable
                 style={{
                     width: '80%',
-                    height: '40%', // Фиксированная высота для карточки
+                    height: 'auto', // Высота подстраивается под содержимое
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    color: 'black'
+                    position: 'relative', // Для позиционирования имени автора
                 }}
                 onClick={showModal}
             >
-                <div style={{margintop: "10px", marginLeft: "5px", color}}>
-                    title={stream.name || "Название видео не указано"}
-                </div>
-                {/* Текстовая информация и имя автора */}
-                <div style={{ padding: '10px', textAlign: 'center' }}>
-                    <Meta
-                        description={stream.description || "Описание видео не указано"}
-                    />
-                    <div style={{ marginTop: 8 }}>
-                        <Tag>{stream.owner_name || "Владелец видео не указан"}</Tag>
-                    </div>
+                {/* Название сверху */}
+                <div style={{ padding: '10px', textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>
+                    {stream.name || "Название видео не указано"}
                 </div>
 
-                {/* Обертка для изображения с фиксированной высотой */}
+                {/* Картинка */}
                 <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
                         alt="Плейсхолдер заставки видео"
@@ -54,12 +44,20 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                         style={{
                             width: '100%',
                             height: '100%',
-                            objectFit: 'contain' // Изменено на 'contain'
+                            objectFit: 'contain',
                         }}
                     />
                 </div>
 
-                
+                {/* Описание */}
+                <div style={{ padding: '10px', textAlign: 'center', fontSize: '14px' }}>
+                    {stream.description || "Описание видео не указано"}
+                </div>
+
+                {/* Имя автора внизу справа */}
+                <div style={{ position: 'absolute', bottom: '10px', right: '10px', fontSize: '12px', color: 'gray' }}>
+                    {stream.owner_name || "Автор не указан"}
+                </div>
             </Card>
 
             {/* Модальное окно для отображения видео */}
