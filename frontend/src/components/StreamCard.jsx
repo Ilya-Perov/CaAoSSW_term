@@ -28,11 +28,14 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative', // Для позиционирования имени автора
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', // Черная обводка (dropshadow)
+                    borderRadius: '10px', // Добавлен небольшой радиус для скругления углов
+                    overflow: 'hidden', // Убираем выходящий контент
                 }}
                 onClick={showModal}
             >
                 {/* Название сверху */}
-                <div style={{ padding: '10px', textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>
+                <div style={{ padding: '10px', textAlign: 'left', fontWeight: 'bold', fontSize: '18px' }}>
                     {stream.name || "Название видео не указано"}
                 </div>
 
@@ -50,7 +53,7 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                 </div>
 
                 {/* Описание */}
-                <div style={{ padding: '10px', textAlign: 'center', fontSize: '14px' }}>
+                <div style={{ padding: '10px', textAlign: 'left', fontSize: '14px' }}>
                     {stream.description || "Описание видео не указано"}
                 </div>
 
