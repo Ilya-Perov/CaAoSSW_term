@@ -4,7 +4,7 @@ import { Empty, List, Button, Space, Modal, Input, Form } from 'antd';
 import axios from 'axios';
 import StreamCard from "./components/StreamCard.jsx";
 const App = () => {
-    const API_URL = "http://localhost";
+    const API_URL = "http://176.108.255.14";
     const [streams, setStreams] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);

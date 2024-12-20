@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function StreamModal({ stream, isVisible, onClose, onStreamUpdated, onStreamDeleted }) {
     const [form] = Form.useForm();
-    const API_URL = "http://localhost";
+    const API_URL = "http://176.108.255.14";
     const [isEditing, setIsEditing] = useState(false);
 
     const getVideoLink = (link) => {
