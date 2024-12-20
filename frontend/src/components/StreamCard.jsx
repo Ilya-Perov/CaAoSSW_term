@@ -28,10 +28,24 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                     height: '40%', // Фиксированная высота для карточки
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
+                    color: 'black'
                 }}
                 onClick={showModal}
             >
+                <div style={{margintop: "10px", marginLeft: "5px", color}}>
+                    title={stream.name || "Название видео не указано"}
+                </div>
+                {/* Текстовая информация и имя автора */}
+                <div style={{ padding: '10px', textAlign: 'center' }}>
+                    <Meta
+                        description={stream.description || "Описание видео не указано"}
+                    />
+                    <div style={{ marginTop: 8 }}>
+                        <Tag>{stream.owner_name || "Владелец видео не указан"}</Tag>
+                    </div>
+                </div>
+
                 {/* Обертка для изображения с фиксированной высотой */}
                 <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
@@ -45,16 +59,7 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                     />
                 </div>
 
-                {/* Текстовая информация и имя автора */}
-                <div style={{ padding: '10px', textAlign: 'left' }}>
-                    <Meta
-                        title={stream.name || "Название видео не указано"}
-                        description={stream.description || "Описание видео не указано"}
-                    />
-                    <div style={{ marginTop: 8 }}>
-                        <Tag color="blue">{stream.owner_name || "Владелец видео не указан"}</Tag>
-                    </div>
-                </div>
+                
             </Card>
 
             {/* Модальное окно для отображения видео */}
