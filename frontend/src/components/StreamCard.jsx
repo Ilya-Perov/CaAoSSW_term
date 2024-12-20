@@ -23,6 +23,9 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
             className="flex items-center"
             style={{
                 margin: '10px 0 0 10px', // Отступ сверху и слева в 10px
+                backgroundColor: '#f0f0f0', // Подложка - светло-серый цвет
+                padding: '20px', // Добавлен отступ вокруг карточки
+                borderRadius: '10px', // Подложка тоже немного скруглена
             }}
         >
             <Card
@@ -33,8 +36,9 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative', // Для позиционирования имени автора
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', // Черная обводка (dropshadow)
-                    borderRadius: '10px', // Добавлен небольшой радиус для скругления углов
+                    backgroundColor: '#d9d9d9', // Серый фон карточки
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)', // Тень для выделения карточки
+                    borderRadius: '10px', // Скругленные углы карточки
                     overflow: 'hidden', // Убираем выходящий контент
                 }}
                 onClick={showModal}
