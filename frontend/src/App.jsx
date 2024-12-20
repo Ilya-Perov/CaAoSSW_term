@@ -160,7 +160,7 @@ const App = () => {
             <div style={{ clear: 'both', backgroundColor: 'lightgray'}}>
                 {streams.length === 0 ? (
                     <Empty
-                        description={<span style={{ fontSize: '24px', fontWeight: 'bold', textAlign:'center'}}>Здесь пока пусто...<br/>Давайте что-нибудь посмотрим</span>}
+                        description={<span style={{ fontSize: '24px', fontWeight: 'bold', textAlign:'center'}}>Здесь пока пусто...</span>}
                     />
                 ) : (
                     <List
