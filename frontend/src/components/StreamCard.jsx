@@ -19,7 +19,12 @@ function StreamCard({ stream, onStreamUpdated, onStreamDeleted }) {
     };
 
     return (
-        <div className="flex items-center">
+        <div
+            className="flex items-center"
+            style={{
+                margin: '10px 0 0 10px', // Отступ сверху и слева в 10px
+            }}
+        >
             <Card
                 hoverable
                 style={{
